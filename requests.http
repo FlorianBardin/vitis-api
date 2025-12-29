@@ -13,3 +13,6 @@ Content-Type: application/json
   "region": "Champagne",
   "address": "20 Boulevard Maréchal de Lattre, 51160, Aÿ"
 }
+
+### DELETE requeste to delete a winery by id
+DELETE http://localhost:8080/wineries/2
