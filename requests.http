@@ -3,3 +3,13 @@ GET http://localhost:8080/wineries
 
 ### GET request to get winery by id
 GET http://localhost:8080/wineries/2
+
+### POST request to insert a new winery
+POST http://localhost:8080/wineries
+Content-Type: application/json
+
+{
+  "name": "Champagne Bollinger",
+  "region": "Champagne",
+  "address": "20 Boulevard Maréchal de Lattre, 51160, Aÿ"
+}
