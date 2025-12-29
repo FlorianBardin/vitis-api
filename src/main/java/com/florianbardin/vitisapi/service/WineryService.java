@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public class WineryService {
+
     private final WineryRepository wineryRepository;
 
     public WineryService(WineryRepository wineryRepository) {
@@ -16,5 +17,9 @@ public class WineryService {
 
     public List<Winery> findAll() {
         return wineryRepository.findAll();
+    }
+
+    public Winery findById(Integer id) {
+        return wineryRepository.findById(id).orElse(null);
     }
 }
