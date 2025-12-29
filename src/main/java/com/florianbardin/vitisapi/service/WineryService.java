@@ -30,4 +30,16 @@ public class WineryService {
     public void deleteWinery(Integer id) {
         wineryRepository.deleteById(id);
     }
+
+    public void updateWinery(Integer id, Winery winery) {
+        Winery updatedWinery = wineryRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No such winery found with id: " + id
+                ));
+        updatedWinery.setName(winery.getName());
+        updatedWinery.setRegion(winery.getRegion());
+        updatedWinery.setAddress(winery.getAddress());
+
+        wineryRepository.save(updatedWinery);
+    }
 }
