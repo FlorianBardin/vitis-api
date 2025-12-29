@@ -30,4 +30,9 @@ public class WineryController {
     public void insertWinery(@RequestBody Winery winery) {
         wineryService.insertWinery(winery);
     }
+
+    @DeleteMapping("{id}")
+    public void deleteWinery(@PathVariable Integer id) {
+        wineryService.deleteWinery(id);
+    }
 }
