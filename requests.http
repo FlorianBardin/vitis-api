@@ -1,4 +1,5 @@
 ### GET request to get all wineries
 GET http://localhost:8080/wineries
 
-###
+### GET request to get winery by id
+GET http://localhost:8080/wineries/2
