@@ -35,4 +35,9 @@ public class WineryController {
     public void deleteWinery(@PathVariable Integer id) {
         wineryService.deleteWinery(id);
     }
+
+    @PutMapping("{id}")
+    public void updateWinery(@PathVariable Integer id, @RequestBody Winery winery) {
+        wineryService.updateWinery(id, winery);
+    }
 }
