@@ -14,5 +14,15 @@ Content-Type: application/json
   "address": "20 Boulevard Maréchal de Lattre, 51160, Aÿ"
 }
 
-### DELETE requeste to delete a winery by id
+### DELETE request to delete a winery by id
 DELETE http://localhost:8080/wineries/2
+
+### PUT request to update a winery
+PUT http://localhost:8080/wineries/2
+Content-Type: application/json
+
+{
+  "name": "Champagne Taittinger",
+  "region": "Champagne",
+  "address": "9 Place Saint-Nicaise, 51100 Reims"
+}
