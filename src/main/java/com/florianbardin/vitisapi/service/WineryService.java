@@ -26,4 +26,8 @@ public class WineryService {
     public void insertWinery(Winery winery) {
         wineryRepository.save(winery);
     }
+
+    public void deleteWinery(Integer id) {
+        wineryRepository.deleteById(id);
+    }
 }
