@@ -20,7 +20,10 @@ public class WineryService {
     }
 
     public Winery findById(Integer id) {
-        return wineryRepository.findById(id).orElse(null);
+        return wineryRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No Winery found with id: " + id
+                ));
     }
 
     public void insertWinery(Winery winery) {
