@@ -4,6 +4,7 @@ import com.florianbardin.vitisapi.entity.Winery;
 import com.florianbardin.vitisapi.repository.WineryRepository;
 import com.florianbardin.vitisapi.service.WineryService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,11 @@ public class WineryController {
     @GetMapping
     public List<Winery> getWineries() {
         return wineryService.findAll();
+    }
+
+    @GetMapping("{id}")
+    public Winery findById(@PathVariable Integer id) {
+        return wineryService.findById(id);
     }
 
 }
