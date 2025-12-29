@@ -22,4 +22,8 @@ public class WineryService {
     public Winery findById(Integer id) {
         return wineryRepository.findById(id).orElse(null);
     }
+
+    public void insertWinery(Winery winery) {
+        wineryRepository.save(winery);
+    }
 }
