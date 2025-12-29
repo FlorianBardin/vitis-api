@@ -1,12 +1,8 @@
 package com.florianbardin.vitisapi.controller;
 
 import com.florianbardin.vitisapi.entity.Winery;
-import com.florianbardin.vitisapi.repository.WineryRepository;
 import com.florianbardin.vitisapi.service.WineryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +26,8 @@ public class WineryController {
         return wineryService.findById(id);
     }
 
+    @PostMapping
+    public void insertWinery(@RequestBody Winery winery) {
+        wineryService.insertWinery(winery);
+    }
 }
