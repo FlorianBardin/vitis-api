@@ -2,6 +2,7 @@ package com.florianbardin.vitisapi.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,11 +11,17 @@ public class Winery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String region;
+
     private String address;
+
+    @OneToMany
+    private List<Wine> wine;
 
     public Winery() {
     }
@@ -58,15 +65,23 @@ public class Winery {
         this.address = address;
     }
 
+    public List<Wine> getWine() {
+        return wine;
+    }
+
+    public void setWine(List<Wine> wine) {
+        this.wine = wine;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Winery winery = (Winery) o;
-        return Objects.equals(id, winery.id) && Objects.equals(name, winery.name) && Objects.equals(region, winery.region) && Objects.equals(address, winery.address);
+        return Objects.equals(id, winery.id) && Objects.equals(name, winery.name) && Objects.equals(region, winery.region) && Objects.equals(address, winery.address) && Objects.equals(wine, winery.wine);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, region, address);
+        return Objects.hash(id, name, region, address, wine);
     }
 }
