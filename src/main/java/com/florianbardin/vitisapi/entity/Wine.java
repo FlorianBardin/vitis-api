@@ -13,7 +13,7 @@ public class Wine {
     @NotBlank
     private String name;
 
-    @NotBlank
+    @NotNull
     @Digits(fraction = 0, integer = 4)
     @PositiveOrZero
     private Integer vintage;
