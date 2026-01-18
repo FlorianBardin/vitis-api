@@ -2,6 +2,7 @@ package com.florianbardin.vitisapi.controller;
 
 import com.florianbardin.vitisapi.entity.Winery;
 import com.florianbardin.vitisapi.service.WineryService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class WineryController {
     }
 
     @PostMapping
-    public void insertWinery(@RequestBody Winery winery) {
+    public void insertWinery(@Valid @RequestBody Winery winery) {
         wineryService.insertWinery(winery);
     }
 
@@ -37,7 +38,7 @@ public class WineryController {
     }
 
     @PutMapping("{id}")
-    public void updateWinery(@PathVariable Integer id, @RequestBody Winery winery) {
+    public void updateWinery(@PathVariable Integer id, @Valid @RequestBody Winery winery) {
         wineryService.updateWinery(id, winery);
     }
 }
