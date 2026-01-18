@@ -29,6 +29,7 @@ public class Wine {
 
     @ManyToOne
     @NotNull
+    @JoinColumn(name = "winery_id")
     private Winery winery;
 
     public Wine() {

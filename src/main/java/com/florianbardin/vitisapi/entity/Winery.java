@@ -21,7 +21,7 @@ public class Winery {
 
     private String address;
 
-    @OneToMany
+    @OneToMany(mappedBy = "winery")
     private List<Wine> wine;
 
     public Winery() {
