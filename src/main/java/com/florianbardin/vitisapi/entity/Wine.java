@@ -1,8 +1,7 @@
 package com.florianbardin.vitisapi.entity;
 
 import jakarta.persistence.*;
-
-import java.util.Objects;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Wine {
@@ -11,27 +10,31 @@ public class Wine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @NotBlank
     private String name;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Digits(fraction = 0, integer = 4)
+    @PositiveOrZero
     private Integer vintage;
 
-    @Column(nullable = false)
-    private Integer color;
+    @NotBlank
+    private String color;
 
+    @PositiveOrZero
     private Double price;
 
+    @PositiveOrZero
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @NotNull
     private Winery winery;
 
     public Wine() {
     }
 
-    public Wine(Integer id, String name, Integer vintage, Integer color, Double price, Integer stock, Winery winery) {
+    public Wine(Integer id, String name, Integer vintage, String color, Double price, Integer stock, Winery winery) {
         this.id = id;
         this.name = name;
         this.vintage = vintage;
@@ -65,11 +68,11 @@ public class Wine {
         this.vintage = vintage;
     }
 
-    public Integer getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Integer color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -97,15 +100,5 @@ public class Wine {
         this.winery = winery;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Wine wine = (Wine) o;
-        return Objects.equals(id, wine.id) && Objects.equals(name, wine.name) && Objects.equals(vintage, wine.vintage) && Objects.equals(color, wine.color) && Objects.equals(price, wine.price) && Objects.equals(stock, wine.stock) && Objects.equals(winery, wine.winery);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, vintage, color, price, stock, winery);
-    }
 }
