@@ -22,7 +22,7 @@ public class Winery {
     private String address;
 
     @OneToMany(mappedBy = "winery")
-    private List<Wine> wine;
+    private List<Wine> wines;
 
     public Winery() {
     }
@@ -66,23 +66,23 @@ public class Winery {
         this.address = address;
     }
 
-    public List<Wine> getWine() {
-        return wine;
+    public List<Wine> getWines() {
+        return wines;
     }
 
-    public void setWine(List<Wine> wine) {
-        this.wine = wine;
+    public void setWines(List<Wine> wine) {
+        this.wines = wine;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Winery winery = (Winery) o;
-        return Objects.equals(id, winery.id) && Objects.equals(name, winery.name) && Objects.equals(region, winery.region) && Objects.equals(address, winery.address) && Objects.equals(wine, winery.wine);
+        return Objects.equals(id, winery.id) && Objects.equals(name, winery.name) && Objects.equals(region, winery.region) && Objects.equals(address, winery.address) && Objects.equals(wines, winery.wines);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, region, address, wine);
+        return Objects.hash(id, name, region, address, wines);
     }
 }
