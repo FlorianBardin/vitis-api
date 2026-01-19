@@ -15,4 +15,7 @@ public class WineService {
         this.wineRepository = wineRepository;
     }
 
+    public List<Wine> findAll() {
+        return wineRepository.findAll();
+    }
 }
