@@ -49,7 +49,5 @@ public class WineryService {
         updatedWinery.setName(winery.getName());
         updatedWinery.setRegion(winery.getRegion());
         updatedWinery.setAddress(winery.getAddress());
-
-        wineryRepository.save(updatedWinery);
     }
 }
