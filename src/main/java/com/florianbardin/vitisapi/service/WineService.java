@@ -18,4 +18,11 @@ public class WineService {
     public List<Wine> findAll() {
         return wineRepository.findAll();
     }
+
+    public Wine findById(Integer id) {
+        return wineRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Wine with id " + id + " not found"
+                ));
+    }
 }
