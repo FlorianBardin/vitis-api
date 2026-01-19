@@ -2,6 +2,7 @@ package com.florianbardin.vitisapi.service;
 
 import com.florianbardin.vitisapi.entity.Winery;
 import com.florianbardin.vitisapi.repository.WineryRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,8 +25,8 @@ public class WineryService {
 
     public Winery findById(Integer id) {
         return wineryRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "No Winery found with id: " + id
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
                 ));
     }
 
@@ -42,8 +43,8 @@ public class WineryService {
     @Transactional
     public void updateWinery(Integer id, Winery winery) {
         Winery updatedWinery = wineryRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "No such winery found with id: " + id
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
                 ));
         updatedWinery.setName(winery.getName());
         updatedWinery.setRegion(winery.getRegion());
