@@ -23,4 +23,8 @@ public class WineController {
         return wineService.findAll();
     }
 
+    @GetMapping("{id}")
+    public Wine findById(Integer id) {
+        return wineService.findById(id);
+    }
 }
