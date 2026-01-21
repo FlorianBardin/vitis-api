@@ -1,7 +1,6 @@
 package com.florianbardin.vitisapi.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 @Entity
 public class Wine {
@@ -10,25 +9,20 @@ public class Wine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
-    @Digits(fraction = 0, integer = 4)
-    @PositiveOrZero
+    @Column(nullable = false)
     private Integer vintage;
 
-    @NotBlank
+    @Column(nullable = false)
     private String color;
 
-    @PositiveOrZero
     private Double price;
 
-    @PositiveOrZero
     private Integer stock;
 
     @ManyToOne
-    @NotNull
     @JoinColumn(name = "winery_id")
     private Winery winery;
 
