@@ -16,4 +16,16 @@ public class WineDtoMapper {
 
         return wine;
     }
+
+    public  WineDto toWineDto(Wine wine) {
+        return new WineDto(
+                wine.getId(),
+                wine.getName(),
+                wine.getVintage(),
+                wine.getColor(),
+                wine.getPrice(),
+                wine.getStock(),
+                wine.getWinery().getId()
+        );
+    }
 }
