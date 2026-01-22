@@ -1,10 +1,9 @@
 package com.florianbardin.vitisapi.controller;
 
-import com.florianbardin.vitisapi.entity.Wine;
+import com.florianbardin.vitisapi.dto.WineDto;
 import com.florianbardin.vitisapi.service.WineService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +25,10 @@ public class WineController {
     @GetMapping("{id}")
     public WineDto findById(@PathVariable Integer id) {
         return wineService.findById(id);
+    }
+
+    @PostMapping
+    public WineDto create(@Valid @RequestBody WineDto wineDto) {
+        return wineService.insertWine(wineDto);
     }
 }
