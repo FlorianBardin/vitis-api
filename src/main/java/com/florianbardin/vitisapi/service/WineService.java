@@ -2,8 +2,10 @@ package com.florianbardin.vitisapi.service;
 
 import com.florianbardin.vitisapi.dto.WineDto;
 import com.florianbardin.vitisapi.entity.Wine;
+import com.florianbardin.vitisapi.entity.Winery;
 import com.florianbardin.vitisapi.mapper.WineDtoMapper;
 import com.florianbardin.vitisapi.repository.WineRepository;
+import com.florianbardin.vitisapi.repository.WineryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +21,12 @@ public class WineService {
 
     private final WineRepository wineRepository;
     private final WineDtoMapper wineDtoMapper;
+    private final WineryRepository wineryRepository;
 
-    public WineService(WineRepository wineRepository, WineDtoMapper wineDtoMapper) {
+    public WineService(WineRepository wineRepository, WineDtoMapper wineDtoMapper, WineryRepository wineryRepository) {
         this.wineRepository = wineRepository;
         this.wineDtoMapper = wineDtoMapper;
+        this.wineryRepository = wineryRepository;
     }
 
     public List<WineDto> findAll() {
@@ -39,5 +43,23 @@ public class WineService {
                 ));
 
         return wineDtoMapper.toWineDto(wine);
+    }
+
+    @Transactional
+    public WineDto insertWine(WineDto wineDto) {
+        Wine newWine = new Wine();
+        Winery winery = wineryRepository.findById(wineDto.wineryId())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Winery with id " + wineDto.wineryId() + " not found"
+                ));
+        newWine.setName(wineDto.name());
+        newWine.setVintage(wineDto.vintage());
+        newWine.setColor(wineDto.color());
+        newWine.setPrice(wineDto.price());
+        newWine.setStock(wineDto.stock());
+        newWine.setWinery(winery);
+        newWine = wineRepository.save(newWine);
+
+        return wineDtoMapper.toWineDto(newWine);
     }
 }
