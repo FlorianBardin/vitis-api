@@ -47,19 +47,16 @@ public class WineService {
 
     @Transactional
     public WineDto insertWine(WineDto wineDto) {
-        Wine newWine = new Wine();
         Winery winery = wineryRepository.findById(wineDto.wineryId())
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Winery with id " + wineDto.wineryId() + " not found"
                 ));
-        newWine.setName(wineDto.name());
-        newWine.setVintage(wineDto.vintage());
-        newWine.setColor(wineDto.color());
-        newWine.setPrice(wineDto.price());
-        newWine.setStock(wineDto.stock());
-        newWine.setWinery(winery);
-        newWine = wineRepository.save(newWine);
 
-        return wineDtoMapper.toWineDto(newWine);
+        Wine newWine = wineDtoMapper.toWine(wineDto);
+        newWine.setWinery(winery);
+
+        Wine savedWine = wineRepository.save(newWine);
+
+        return wineDtoMapper.toWineDto(savedWine);
     }
 }
