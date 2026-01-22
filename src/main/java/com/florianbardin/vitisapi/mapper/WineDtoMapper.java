@@ -28,4 +28,12 @@ public class WineDtoMapper {
                 wine.getWinery().getId()
         );
     }
+
+    public void updateWineFromDto(Wine wine, WineDto wineDto) {
+        wine.setName(wineDto.name());
+        wine.setVintage(wineDto.vintage());
+        wine.setColor(wineDto.color());
+        wine.setPrice(wineDto.price());
+        wine.setStock(wineDto.stock());
+    }
 }
