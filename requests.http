@@ -26,3 +26,21 @@ Content-Type: application/json
   "region": "Champagne",
   "address": "9 Place Saint-Nicaise, 51100 Reims"
 }
+
+### GET request to get all wines
+GET http://localhost:8080/wines
+
+### Get request to get a wine by id
+GET http://localhost:8080/wines/1
+
+### POST request to create a new wine
+POST http://localhost:8080/wines
+Content-Type: application/json
+
+{
+  "name": "PNVZ19",
+  "color": "Blanc de noir",
+  "vintage": 2019,
+  "price": 115.00,
+  "wineryId": 1
+}
