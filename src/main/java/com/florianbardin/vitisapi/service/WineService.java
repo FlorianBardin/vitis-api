@@ -32,10 +32,12 @@ public class WineService {
                 .collect(toList());
     }
 
-    public Wine findById(Integer id) {
-        return wineRepository.findById(id)
+    public WineDto findById(Integer id) {
+        Wine wine = wineRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Wine with id " + id + " not found"
                 ));
+
+        return wineDtoMapper.toWineDto(wine);
     }
 }
