@@ -19,12 +19,12 @@ public class WineController {
     }
 
     @GetMapping
-    public List<Wine> findAll() {
+    public List<WineDto> findAll() {
         return wineService.findAll();
     }
 
     @GetMapping("{id}")
-    public Wine findById(Integer id) {
+    public WineDto findById(@PathVariable Integer id) {
         return wineService.findById(id);
     }
 }
