@@ -18,15 +18,17 @@ import static java.util.stream.Collectors.toList;
 public class WineService {
 
     private final WineRepository wineRepository;
+    private final WineDtoMapper wineDtoMapper;
 
-    public WineService(WineRepository wineRepository) {
+    public WineService(WineRepository wineRepository, WineDtoMapper wineDtoMapper) {
         this.wineRepository = wineRepository;
+        this.wineDtoMapper = wineDtoMapper;
     }
 
     public List<WineDto> findAll() {
         return wineRepository.findAll()
                 .stream()
-                .map(WineDtoMapper::toWineDto)
+                .map(wineDtoMapper::toWineDto)
                 .collect(toList());
     }
 
