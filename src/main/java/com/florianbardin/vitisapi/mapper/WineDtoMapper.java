@@ -17,7 +17,7 @@ public class WineDtoMapper {
         return wine;
     }
 
-    public  WineDto toWineDto(Wine wine) {
+    public WineDto toWineDto(Wine wine) {
         return new WineDto(
                 wine.getId(),
                 wine.getName(),
