@@ -5,9 +5,10 @@
 
 ### Requires
 
+- Java 21
 - Docker
 
-### Database
+### Database deployment
 
 ```bash
 docker compose up -d
@@ -24,4 +25,15 @@ CREATE DATABASE vitis_api;
 - address varchar(255)
 - name varchar(255) not null
 - region varchar(255) not null
+```
+
+**Wine** table :
+```sql
+- id integer not null,
+- price float(53),
+- stock integer,
+- vintage integer not null,
+- winery_id integer,
+- color varchar(255) not null,
+- name varchar(255) not null,
 ```
