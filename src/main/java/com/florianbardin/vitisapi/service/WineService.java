@@ -78,6 +78,8 @@ public class WineService {
             updatedWine.setWinery(winery);
         }
 
-        return wineDtoMapper.toWineDto(updatedWine);
+        Wine savedWine = wineRepository.save(updatedWine);
+
+        return wineDtoMapper.toWineDto(savedWine);
     }
 }
