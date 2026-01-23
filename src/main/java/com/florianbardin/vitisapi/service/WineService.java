@@ -59,4 +59,25 @@ public class WineService {
 
         return wineDtoMapper.toWineDto(savedWine);
     }
+
+    @Transactional
+    public WineDto updateWine(Integer id, WineDto wineDto) {
+        Wine updatedWine = wineRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Wine with id " + id + " not found"
+                ));
+
+        wineDtoMapper.updateWineFromDto(wineDto, updatedWine);
+
+        if (wineDto.wineryId() != null && !wineDto.wineryId().equals(updatedWine.getWinery().getId())) {
+            Winery winery = wineryRepository.findById(wineDto.wineryId())
+                    .orElseThrow(() -> new ResponseStatusException(
+                            HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
+                    ));
+
+            updatedWine.setWinery(winery);
+        }
+
+        return wineDtoMapper.toWineDto(updatedWine);
+    }
 }
