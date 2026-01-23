@@ -31,4 +31,9 @@ public class WineController {
     public WineDto create(@Valid @RequestBody WineDto wineDto) {
         return wineService.insertWine(wineDto);
     }
+
+    @PutMapping("{id}")
+    public WineDto update(@PathVariable Integer id, @Valid @RequestBody WineDto wineDto) {
+        return wineService.updateWine(id, wineDto);
+    }
 }
