@@ -29,7 +29,7 @@ public class WineDtoMapper {
         );
     }
 
-    public void updateWineFromDto(Wine wine, WineDto wineDto) {
+    public void updateWineFromDto(WineDto wineDto, Wine wine) {
         wine.setName(wineDto.name());
         wine.setVintage(wineDto.vintage());
         wine.setColor(wineDto.color());
