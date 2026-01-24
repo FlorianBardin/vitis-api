@@ -82,4 +82,13 @@ public class WineService {
 
         return wineDtoMapper.toWineDto(savedWine);
     }
+
+    @Transactional
+    public void deleteWine(Integer id) {
+        if (!wineRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Wine with id " + id + " not found");
+        }
+
+        wineRepository.deleteById(id);
+    }
 }
