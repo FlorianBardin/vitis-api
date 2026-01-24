@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 public class WineDtoMapper {
     public Wine toWine(WineDto wineDto) {
         Wine wine = new Wine();
+        wine.setId(wineDto.id());
         wine.setName(wineDto.name());
         wine.setVintage(wineDto.vintage());
         wine.setType(wineDto.type());
