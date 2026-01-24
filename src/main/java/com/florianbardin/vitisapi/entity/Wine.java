@@ -2,6 +2,8 @@ package com.florianbardin.vitisapi.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 public class Wine {
 
@@ -14,6 +16,10 @@ public class Wine {
 
     @Column(nullable = false)
     private Integer vintage;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private WineType type;
 
     @Column(nullable = false)
     private String color;
@@ -95,5 +101,23 @@ public class Wine {
         this.winery = winery;
     }
 
+    public WineType getType() {
+        return type;
+    }
 
+    public void setType(WineType wineType) {
+        this.type = wineType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Wine wine = (Wine) o;
+        return Objects.equals(id, wine.id) && Objects.equals(name, wine.name) && Objects.equals(vintage, wine.vintage) && type == wine.type && Objects.equals(color, wine.color) && Objects.equals(price, wine.price) && Objects.equals(stock, wine.stock) && Objects.equals(winery, wine.winery);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, vintage, type, color, price, stock, winery);
+    }
 }
