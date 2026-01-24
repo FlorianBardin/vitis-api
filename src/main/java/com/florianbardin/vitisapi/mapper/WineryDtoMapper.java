@@ -14,4 +14,13 @@ public class WineryDtoMapper {
 
         return winery;
     }
+
+    public WineryDto toWineryDto(Winery winery) {
+        return new WineryDto(
+                winery.getId(),
+                winery.getName(),
+                winery.getRegion(),
+                winery.getAddress()
+        );
+    }
 }
