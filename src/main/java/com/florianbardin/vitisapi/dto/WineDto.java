@@ -1,5 +1,6 @@
 package com.florianbardin.vitisapi.dto;
 
+import com.florianbardin.vitisapi.entity.WineType;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,6 +14,8 @@ public record WineDto(
         @Digits(fraction = 0, integer = 4)
         @PositiveOrZero
         Integer vintage,
+        @NotNull
+        WineType type,
         @NotBlank
         String color,
         @PositiveOrZero
