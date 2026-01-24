@@ -10,6 +10,7 @@ public class WineDtoMapper {
         Wine wine = new Wine();
         wine.setName(wineDto.name());
         wine.setVintage(wineDto.vintage());
+        wine.setType(wineDto.type());
         wine.setColor(wineDto.color());
         wine.setPrice(wineDto.price());
         wine.setStock(wineDto.stock());
@@ -22,6 +23,7 @@ public class WineDtoMapper {
                 wine.getId(),
                 wine.getName(),
                 wine.getVintage(),
+                wine.getType(),
                 wine.getColor(),
                 wine.getPrice(),
                 wine.getStock(),
@@ -32,6 +34,7 @@ public class WineDtoMapper {
     public void updateWineFromDto(WineDto wineDto, Wine wine) {
         wine.setName(wineDto.name());
         wine.setVintage(wineDto.vintage());
+        wine.setType(wineDto.type());
         wine.setColor(wineDto.color());
         wine.setPrice(wineDto.price());
         wine.setStock(wineDto.stock());
