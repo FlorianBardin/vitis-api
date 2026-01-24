@@ -36,4 +36,9 @@ public class WineController {
     public WineDto update(@PathVariable Integer id, @Valid @RequestBody WineDto wineDto) {
         return wineService.updateWine(id, wineDto);
     }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Integer id) {
+        wineService.deleteWine(id);
+    }
 }
