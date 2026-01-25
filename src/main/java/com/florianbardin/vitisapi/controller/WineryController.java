@@ -39,7 +39,7 @@ public class WineryController {
     }
 
     @PutMapping("{id}")
-    public void updateWinery(@PathVariable Integer id, @Valid @RequestBody Winery winery) {
-        wineryService.updateWinery(id, winery);
+    public WineryDto updateWinery(@PathVariable Integer id, @Valid @RequestBody WineryDto wineryDto) {
+        return wineryService.updateWinery(id, wineryDto);
     }
 }

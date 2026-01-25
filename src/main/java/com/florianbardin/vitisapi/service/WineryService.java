@@ -58,13 +58,15 @@ public class WineryService {
     }
 
     @Transactional
-    public void updateWinery(Integer id, Winery winery) {
-        Winery updatedWinery = wineryRepository.findById(id)
+    public WineryDto updateWinery(Integer id, WineryDto wineryDto) {
+        Winery wineryToUpdate = wineryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
                 ));
-        updatedWinery.setName(winery.getName());
-        updatedWinery.setRegion(winery.getRegion());
-        updatedWinery.setAddress(winery.getAddress());
+        wineryDtoMapper.updateWineryFromDto(wineryDto, wineryToUpdate);
+
+        Winery savedWinery = wineryRepository.save(wineryToUpdate);
+
+        return wineryDtoMapper.toWineryDto(savedWinery);
     }
 }
