@@ -32,11 +32,13 @@ public class WineryService {
                 .collect(toList());
     }
 
-    public Winery findById(Integer id) {
-        return wineryRepository.findById(id)
+    public WineryDto findById(Integer id) {
+        Winery winery = wineryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
                 ));
+
+        return wineryDtoMapper.toWineryDto(winery);
     }
 
     @Transactional

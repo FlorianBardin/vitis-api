@@ -24,7 +24,7 @@ public class WineryController {
     }
 
     @GetMapping("{id}")
-    public Winery findById(@PathVariable Integer id) {
+    public WineryDto findById(@PathVariable Integer id) {
         return wineryService.findById(id);
     }
 
