@@ -2,7 +2,9 @@ package com.florianbardin.vitisapi.mapper;
 
 import com.florianbardin.vitisapi.dto.WineryDto;
 import com.florianbardin.vitisapi.entity.Winery;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WineryDtoMapper {
     public Winery toWinery(WineryDto wineryDto) {
         Winery winery = new Winery();
