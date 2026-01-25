@@ -1,6 +1,8 @@
 package com.florianbardin.vitisapi.service;
 
+import com.florianbardin.vitisapi.dto.WineryDto;
 import com.florianbardin.vitisapi.entity.Winery;
+import com.florianbardin.vitisapi.mapper.WineryDtoMapper;
 import com.florianbardin.vitisapi.repository.WineryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -9,18 +11,25 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 @Transactional(readOnly = true)
 public class WineryService {
 
     private final WineryRepository wineryRepository;
+    private final WineryDtoMapper wineryDtoMapper;
 
-    public WineryService(WineryRepository wineryRepository) {
+    public WineryService(WineryRepository wineryRepository, WineryDtoMapper wineryDtoMapper) {
         this.wineryRepository = wineryRepository;
+        this.wineryDtoMapper = wineryDtoMapper;
     }
 
-    public List<Winery> findAll() {
-        return wineryRepository.findAll();
+    public List<WineryDto> findAll() {
+        return wineryRepository.findAll()
+                .stream()
+                .map(wineryDtoMapper::toWineryDto)
+                .collect(toList());
     }
 
     public Winery findById(Integer id) {

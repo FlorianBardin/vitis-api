@@ -1,5 +1,6 @@
 package com.florianbardin.vitisapi.controller;
 
+import com.florianbardin.vitisapi.dto.WineryDto;
 import com.florianbardin.vitisapi.entity.Winery;
 import com.florianbardin.vitisapi.service.WineryService;
 import jakarta.validation.Valid;
@@ -18,7 +19,7 @@ public class WineryController {
     }
 
     @GetMapping
-    public List<Winery> getWineries() {
+    public List<WineryDto> getWineries() {
         return wineryService.findAll();
     }
 
