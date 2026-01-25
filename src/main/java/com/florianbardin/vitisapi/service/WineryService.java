@@ -50,8 +50,15 @@ public class WineryService {
 
     @Transactional
     public void delete(Integer id) {
-        if (!wineryRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Winery with id " + id + " not found");
+        Winery winery = wineryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
+                ));
+
+        if (!winery.getWines().isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "Winery with id " + id + " still contains wines"
+            );
         }
 
         wineryRepository.deleteById(id);
