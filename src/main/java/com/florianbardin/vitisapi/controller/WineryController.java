@@ -29,8 +29,8 @@ public class WineryController {
     }
 
     @PostMapping
-    public void insertWinery(@Valid @RequestBody Winery winery) {
-        wineryService.insertWinery(winery);
+    public WineryDto insertWinery(@Valid @RequestBody Winery winery) {
+        return wineryService.insertWinery(winery);
     }
 
     @DeleteMapping("{id}")
