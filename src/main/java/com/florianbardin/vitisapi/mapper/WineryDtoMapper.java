@@ -23,4 +23,10 @@ public class WineryDtoMapper {
                 winery.getAddress()
         );
     }
+
+    public void updateWineryFromDto(WineryDto wineryDto, Winery winery) {
+        winery.setName(wineryDto.name());
+        winery.setRegion(wineryDto.region());
+        winery.setAddress(wineryDto.address());
+    }
 }
