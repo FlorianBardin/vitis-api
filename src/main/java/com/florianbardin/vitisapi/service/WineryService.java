@@ -42,8 +42,8 @@ public class WineryService {
     }
 
     @Transactional
-    public WineryDto insertWinery(Winery winery) {
-        Winery newWinery = wineryRepository.save(winery);
+    public WineryDto insertWinery(WineryDto wineryDto) {
+        Winery newWinery = wineryRepository.save(wineryDtoMapper.toWinery(wineryDto));
 
         return wineryDtoMapper.toWineryDto(newWinery);
     }
