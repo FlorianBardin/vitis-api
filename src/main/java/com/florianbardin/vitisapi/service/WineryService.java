@@ -3,6 +3,7 @@ package com.florianbardin.vitisapi.service;
 import com.florianbardin.vitisapi.dto.WineryDto;
 import com.florianbardin.vitisapi.entity.Winery;
 import com.florianbardin.vitisapi.mapper.WineryDtoMapper;
+import com.florianbardin.vitisapi.repository.WineRepository;
 import com.florianbardin.vitisapi.repository.WineryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,12 @@ public class WineryService {
 
     private final WineryRepository wineryRepository;
     private final WineryDtoMapper wineryDtoMapper;
+    private final WineRepository wineRepository;
 
-    public WineryService(WineryRepository wineryRepository, WineryDtoMapper wineryDtoMapper) {
+    public WineryService(WineryRepository wineryRepository, WineryDtoMapper wineryDtoMapper, WineRepository wineRepository) {
         this.wineryRepository = wineryRepository;
         this.wineryDtoMapper = wineryDtoMapper;
+        this.wineRepository = wineRepository;
     }
 
     public List<WineryDto> findAll() {
@@ -50,15 +53,12 @@ public class WineryService {
 
     @Transactional
     public void delete(Integer id) {
-        Winery winery = wineryRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
-                ));
+        if (!wineryRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Winery with id " + id + " not found");
+        }
 
-        if (!winery.getWines().isEmpty()) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT, "Winery with id " + id + " still contains wines"
-            );
+        if (wineRepository.existsByWineryId(id)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Winery with id " + id + " still contains wines");
         }
 
         wineryRepository.deleteById(id);
