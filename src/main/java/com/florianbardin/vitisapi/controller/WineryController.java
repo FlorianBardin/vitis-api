@@ -1,7 +1,6 @@
 package com.florianbardin.vitisapi.controller;
 
 import com.florianbardin.vitisapi.dto.WineryDto;
-import com.florianbardin.vitisapi.entity.Winery;
 import com.florianbardin.vitisapi.service.WineryService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -29,17 +28,17 @@ public class WineryController {
     }
 
     @PostMapping
-    public WineryDto insertWinery(@Valid @RequestBody WineryDto wineryDto) {
-        return wineryService.insertWinery(wineryDto);
+    public WineryDto create(@Valid @RequestBody WineryDto wineryDto) {
+        return wineryService.create(wineryDto);
     }
 
     @DeleteMapping("{id}")
-    public void deleteWinery(@PathVariable Integer id) {
-        wineryService.deleteWinery(id);
+    public void delete(@PathVariable Integer id) {
+        wineryService.delete(id);
     }
 
     @PutMapping("{id}")
-    public WineryDto updateWinery(@PathVariable Integer id, @Valid @RequestBody WineryDto wineryDto) {
-        return wineryService.updateWinery(id, wineryDto);
+    public WineryDto update(@PathVariable Integer id, @Valid @RequestBody WineryDto wineryDto) {
+        return wineryService.update(id, wineryDto);
     }
 }

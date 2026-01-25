@@ -42,14 +42,14 @@ public class WineryService {
     }
 
     @Transactional
-    public WineryDto insertWinery(WineryDto wineryDto) {
+    public WineryDto create(WineryDto wineryDto) {
         Winery newWinery = wineryRepository.save(wineryDtoMapper.toWinery(wineryDto));
 
         return wineryDtoMapper.toWineryDto(newWinery);
     }
 
     @Transactional
-    public void deleteWinery(Integer id) {
+    public void delete(Integer id) {
         if (!wineryRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Winery with id " + id + " not found");
         }
@@ -58,7 +58,7 @@ public class WineryService {
     }
 
     @Transactional
-    public WineryDto updateWinery(Integer id, WineryDto wineryDto) {
+    public WineryDto update(Integer id, WineryDto wineryDto) {
         Winery wineryToUpdate = wineryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
