@@ -46,7 +46,7 @@ public class WineService {
     }
 
     @Transactional
-    public WineDto insertWine(WineDto wineDto) {
+    public WineDto create(WineDto wineDto) {
         Winery winery = wineryRepository.findById(wineDto.wineryId())
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Winery with id " + wineDto.wineryId() + " not found"
@@ -61,7 +61,7 @@ public class WineService {
     }
 
     @Transactional
-    public WineDto updateWine(Integer id, WineDto wineDto) {
+    public WineDto update(Integer id, WineDto wineDto) {
         Wine updatedWine = wineRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Wine with id " + id + " not found"
@@ -84,7 +84,7 @@ public class WineService {
     }
 
     @Transactional
-    public void deleteWine(Integer id) {
+    public void delete(Integer id) {
         if (!wineRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Wine with id " + id + " not found");
         }

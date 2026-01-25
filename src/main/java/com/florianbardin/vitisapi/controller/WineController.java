@@ -29,16 +29,16 @@ public class WineController {
 
     @PostMapping
     public WineDto create(@Valid @RequestBody WineDto wineDto) {
-        return wineService.insertWine(wineDto);
+        return wineService.create(wineDto);
     }
 
     @PutMapping("{id}")
     public WineDto update(@PathVariable Integer id, @Valid @RequestBody WineDto wineDto) {
-        return wineService.updateWine(id, wineDto);
+        return wineService.update(id, wineDto);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Integer id) {
-        wineService.deleteWine(id);
+        wineService.delete(id);
     }
 }
