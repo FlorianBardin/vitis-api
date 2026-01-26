@@ -10,4 +10,8 @@ public class WineSpecs {
     public static Specification<Wine> hasColor(String color) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("color"), color);
     }
+
+    public static Specification<Wine> hasVintage(Integer vintage) {
+        return (root, query, criteriaBuilder) ->  criteriaBuilder.equal(root.get("vintage"), vintage);
+    }
 }
