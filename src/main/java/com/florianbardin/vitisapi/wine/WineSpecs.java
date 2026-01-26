@@ -20,4 +20,14 @@ public class WineSpecs {
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("vintage"), vintage);
     }
+
+    public static Specification<Wine> hasMaximumPrice(Double maximumPrice) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.lessThanOrEqualTo(root.get("price"), maximumPrice);
+    }
+
+    public static Specification<Wine> hasMinimumPrice(Double minimumPrice) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.greaterThanOrEqualTo(root.get("price"), minimumPrice);
+    }
 }
