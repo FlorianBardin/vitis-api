@@ -1,4 +1,4 @@
-package com.florianbardin.vitisapi.entity;
+package com.florianbardin.vitisapi.wine;
 
 public enum WineType {
     RED,

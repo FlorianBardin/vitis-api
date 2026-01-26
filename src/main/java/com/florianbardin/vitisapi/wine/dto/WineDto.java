@@ -1,6 +1,6 @@
-package com.florianbardin.vitisapi.dto;
+package com.florianbardin.vitisapi.wine.dto;
 
-import com.florianbardin.vitisapi.entity.WineType;
+import com.florianbardin.vitisapi.wine.WineType;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

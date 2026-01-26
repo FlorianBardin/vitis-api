@@ -1,7 +1,6 @@
-package com.florianbardin.vitisapi.controller;
+package com.florianbardin.vitisapi.wine;
 
-import com.florianbardin.vitisapi.dto.WineDto;
-import com.florianbardin.vitisapi.service.WineService;
+import com.florianbardin.vitisapi.wine.dto.WineDto;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,9 @@ public class WineController {
     }
 
     @GetMapping
-    public List<WineDto> findAll() {
+    public List<WineDto> search(
+            @RequestParam
+    ) {
         return wineService.findAll();
     }
 

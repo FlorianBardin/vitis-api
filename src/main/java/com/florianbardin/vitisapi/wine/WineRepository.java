@@ -1,6 +1,5 @@
-package com.florianbardin.vitisapi.repository;
+package com.florianbardin.vitisapi.wine;
 
-import com.florianbardin.vitisapi.entity.Wine;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WineRepository extends JpaRepository<Wine, Integer> {

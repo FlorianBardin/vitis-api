@@ -1,11 +1,9 @@
-package com.florianbardin.vitisapi.service;
+package com.florianbardin.vitisapi.wine;
 
-import com.florianbardin.vitisapi.dto.WineDto;
-import com.florianbardin.vitisapi.entity.Wine;
-import com.florianbardin.vitisapi.entity.Winery;
-import com.florianbardin.vitisapi.mapper.WineDtoMapper;
-import com.florianbardin.vitisapi.repository.WineRepository;
-import com.florianbardin.vitisapi.repository.WineryRepository;
+import com.florianbardin.vitisapi.wine.dto.WineDto;
+import com.florianbardin.vitisapi.winery.Winery;
+import com.florianbardin.vitisapi.wine.dto.WineDtoMapper;
+import com.florianbardin.vitisapi.winery.WineryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,6 @@
-package com.florianbardin.vitisapi.mapper;
+package com.florianbardin.vitisapi.wine.dto;
 
-import com.florianbardin.vitisapi.dto.WineDto;
-import com.florianbardin.vitisapi.entity.Wine;
+import com.florianbardin.vitisapi.wine.Wine;
 import org.springframework.stereotype.Service;
 
 @Service
