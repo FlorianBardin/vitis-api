@@ -6,4 +6,8 @@ public class WineSpecs {
     public static Specification<Wine> hasType(WineType wineType) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("type"), wineType);
     }
+
+    public static Specification<Wine> hasColor(String color) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("color"), color);
+    }
 }
