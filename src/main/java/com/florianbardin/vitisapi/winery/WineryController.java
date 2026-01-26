@@ -1,7 +1,6 @@
-package com.florianbardin.vitisapi.controller;
+package com.florianbardin.vitisapi.winery;
 
-import com.florianbardin.vitisapi.dto.WineryDto;
-import com.florianbardin.vitisapi.service.WineryService;
+import com.florianbardin.vitisapi.winery.dto.WineryDto;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.florianbardin.vitisapi.dto;
+package com.florianbardin.vitisapi.winery.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

@@ -1,8 +1,7 @@
-package com.florianbardin.vitisapi.entity;
+package com.florianbardin.vitisapi.winery;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.florianbardin.vitisapi.wine.Wine;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 import java.util.Objects;
