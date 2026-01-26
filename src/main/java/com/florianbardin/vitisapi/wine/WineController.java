@@ -18,9 +18,13 @@ public class WineController {
 
     @GetMapping
     public List<WineDto> search(
-            @RequestParam
+            @RequestParam(required = false) WineType type,
+            @RequestParam(required = false) String color,
+            @RequestParam(required = false) Integer vintage,
+            @RequestParam(required = false) Double minimumPrice,
+            @RequestParam(required = false) Double maximumPrice
     ) {
-        return wineService.findAll();
+        return wineService.search(type, color, vintage, minimumPrice, maximumPrice);
     }
 
     @GetMapping("{id}")
