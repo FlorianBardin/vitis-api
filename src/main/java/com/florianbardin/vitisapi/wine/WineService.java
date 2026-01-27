@@ -1,14 +1,14 @@
 package com.florianbardin.vitisapi.wine;
 
+import com.florianbardin.vitisapi.exception.WineNotFoundException;
+import com.florianbardin.vitisapi.exception.WineryNotFoundException;
 import com.florianbardin.vitisapi.wine.dto.WineDto;
 import com.florianbardin.vitisapi.winery.Winery;
 import com.florianbardin.vitisapi.wine.dto.WineDtoMapper;
 import com.florianbardin.vitisapi.winery.WineryRepository;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -58,9 +58,7 @@ public class WineService {
 
     public WineDto findById(Integer id) {
         Wine wine = wineRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Wine with id " + id + " not found"
-                ));
+                .orElseThrow(() -> new WineNotFoundException(id));
 
         return wineDtoMapper.toWineDto(wine);
     }
@@ -68,9 +66,7 @@ public class WineService {
     @Transactional
     public WineDto create(WineDto wineDto) {
         Winery winery = wineryRepository.findById(wineDto.wineryId())
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Winery with id " + wineDto.wineryId() + " not found"
-                ));
+                .orElseThrow(() -> new WineNotFoundException(wineDto.wineryId()));
 
         Wine newWine = wineDtoMapper.toWine(wineDto);
         newWine.setWinery(winery);
@@ -83,17 +79,13 @@ public class WineService {
     @Transactional
     public WineDto update(Integer id, WineDto wineDto) {
         Wine updatedWine = wineRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Wine with id " + id + " not found"
-                ));
+                .orElseThrow(() -> new WineNotFoundException(id));
 
         wineDtoMapper.updateWineFromDto(wineDto, updatedWine);
 
         if (wineDto.wineryId() != null && !wineDto.wineryId().equals(updatedWine.getWinery().getId())) {
             Winery winery = wineryRepository.findById(wineDto.wineryId())
-                    .orElseThrow(() -> new ResponseStatusException(
-                            HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
-                    ));
+                    .orElseThrow(() -> new WineryNotFoundException(wineDto.wineryId()));
 
             updatedWine.setWinery(winery);
         }
@@ -106,7 +98,7 @@ public class WineService {
     @Transactional
     public void delete(Integer id) {
         if (!wineRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Wine with id " + id + " not found");
+            throw new WineNotFoundException(id);
         }
 
         wineRepository.deleteById(id);
