@@ -1,6 +1,5 @@
 services:
   db:
-    container_name: postgres-spring-boot
     image: postgres:latest
     environment:
       POSTGRES_USER: user
@@ -13,6 +12,12 @@ services:
     networks:
       - db
     restart: unless-stopped
+  adminer:
+    image: adminer
+    ports:
+      - 8088:8080
+    networks:
+      - db
 
 networks:
   db:
