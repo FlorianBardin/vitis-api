@@ -4,6 +4,7 @@ import com.florianbardin.vitisapi.wine.dto.WineDto;
 import com.florianbardin.vitisapi.winery.Winery;
 import com.florianbardin.vitisapi.wine.dto.WineDtoMapper;
 import com.florianbardin.vitisapi.winery.WineryRepository;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +28,29 @@ public class WineService {
         this.wineryRepository = wineryRepository;
     }
 
-    public List<WineDto> findAll() {
-        return wineRepository.findAll()
+    public List<WineDto> search(
+            WineType type,
+            String color,
+            Integer vintage,
+            Double minimumPrice,
+            Double maximumPrice
+    ) {
+        Specification<Wine> spec = (root, query, criteriaBuilder)
+                -> criteriaBuilder.conjunction();
+
+        if (type != null) {
+            spec = spec.and(WineSpecs.hasType(type));
+        } else if (color != null) {
+            spec = spec.and(WineSpecs.hasColor(color));
+        } else if (vintage != null) {
+            spec = spec.and(WineSpecs.hasVintage(vintage));
+        } else if (minimumPrice != null) {
+            spec = spec.and(WineSpecs.hasMinimumPrice(minimumPrice));
+        } else if (maximumPrice != null) {
+            spec = spec.and(WineSpecs.hasMaximumPrice(maximumPrice));
+        }
+
+        return wineRepository.findAll(spec)
                 .stream()
                 .map(wineDtoMapper::toWineDto)
                 .collect(toList());
