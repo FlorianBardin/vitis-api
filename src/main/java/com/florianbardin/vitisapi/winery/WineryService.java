@@ -1,5 +1,6 @@
 package com.florianbardin.vitisapi.winery;
 
+import com.florianbardin.vitisapi.exception.WineryNotFoundException;
 import com.florianbardin.vitisapi.winery.dto.WineryDto;
 import com.florianbardin.vitisapi.winery.dto.WineryDtoMapper;
 import com.florianbardin.vitisapi.wine.WineRepository;
@@ -35,9 +36,7 @@ public class WineryService {
 
     public WineryDto findById(Integer id) {
         Winery winery = wineryRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
-                ));
+                .orElseThrow(() -> new WineryNotFoundException(id));
 
         return wineryDtoMapper.toWineryDto(winery);
     }
@@ -52,7 +51,7 @@ public class WineryService {
     @Transactional
     public void delete(Integer id) {
         if (!wineryRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Winery with id " + id + " not found");
+            throw new WineryNotFoundException(id);
         }
 
         if (wineRepository.existsByWineryId(id)) {
@@ -65,9 +64,7 @@ public class WineryService {
     @Transactional
     public WineryDto update(Integer id, WineryDto wineryDto) {
         Winery wineryToUpdate = wineryRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Winery with id " + id + " not found"
-                ));
+                .orElseThrow(() -> new WineryNotFoundException(id));
         wineryDtoMapper.updateWineryFromDto(wineryDto, wineryToUpdate);
 
         Winery savedWinery = wineryRepository.save(wineryToUpdate);
