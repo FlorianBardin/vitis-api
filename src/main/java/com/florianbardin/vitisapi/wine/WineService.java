@@ -66,7 +66,7 @@ public class WineService {
     @Transactional
     public WineDto create(WineDto wineDto) {
         Winery winery = wineryRepository.findById(wineDto.wineryId())
-                .orElseThrow(() -> new WineNotFoundException(wineDto.wineryId()));
+                .orElseThrow(() -> new WineryNotFoundException(wineDto.wineryId()));
 
         Wine newWine = wineDtoMapper.toWine(wineDto);
         newWine.setWinery(winery);
