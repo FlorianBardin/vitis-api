@@ -1,5 +1,6 @@
 # Vitis API
-## Florian Bardin
+
+First version of a CRUD API about wineries and wine, made with Spring Boot.
 
 ## Setup
 
