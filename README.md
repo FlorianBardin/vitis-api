@@ -2,22 +2,43 @@
 
 First version of a CRUD API about wineries and wine, made with Spring Boot.
 
-## Setup
+## Installation & Usage
 
-### Requires
+### Requirement
 
 - Java 21
 - Docker
 
+### Installation
+
+```
+# Clone the repository
+git clone https://github.com/FlorianBardin/vitis-api
+
+# Navigate into the project
+cd  vitis-api
+```
+
 ### Database deployment
 
 ```bash
+# Create containers
 docker compose up -d
+
+# Launch database bash
 docker exec -it postgres-spring-boot bash
+
+# Connect as user
 psql -U user
+
+# Create the database
 CREATE DATABASE vitis_api;
 ```
 
+### Start the server
+```
+./mvnw spring-boot:run
+```
 ### Project structure
 
 **Winery** table :
