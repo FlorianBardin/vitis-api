@@ -39,7 +39,23 @@ CREATE DATABASE vitis_api;
 ```
 ./mvnw spring-boot:run
 ```
-### Project structure
+
+## Features
+
+### Functional
+
+- **RESTful CRUD Operations**: Full management of wines and wineries resources.
+- **Search Engine**: Dynamic filtering system for wines (using JPA Specifications).
+- **Data Integrity**: Strict input validation rules preventing corrupted data storage.
+
+### Technical
+
+- **Robust Error Handling**: Centralized exception handling implementing the IETF RFC 7807 standard (Problem Details) for explicit and standardized API errors.
+- **Secure Architecture**: Hiding internal database structure using Data Transfer Objects.
+- **Layered Architecture**: Clean structure (Controller -> Service -> Repository).
+- **Developer Experience (DX)**: Database seeding with mock data (Datafaker) to improve development experience and efficiency.
+
+## Project structure
 
 **Winery** table :
 ```sql
