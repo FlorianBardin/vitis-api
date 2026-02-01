@@ -40,13 +40,17 @@ public class WineService {
 
         if (type != null) {
             spec = spec.and(WineSpecs.hasType(type));
-        } else if (color != null) {
+        }
+        if (color != null) {
             spec = spec.and(WineSpecs.hasColor(color));
-        } else if (vintage != null) {
+        }
+        if (vintage != null) {
             spec = spec.and(WineSpecs.hasVintage(vintage));
-        } else if (minimumPrice != null) {
+        }
+        if (minimumPrice != null) {
             spec = spec.and(WineSpecs.hasMinimumPrice(minimumPrice));
-        } else if (maximumPrice != null) {
+        }
+        if (maximumPrice != null) {
             spec = spec.and(WineSpecs.hasMaximumPrice(maximumPrice));
         }
 
