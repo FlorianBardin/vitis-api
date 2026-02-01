@@ -55,6 +55,15 @@ CREATE DATABASE vitis_api;
 - **Layered Architecture**: Clean structure (Controller -> Service -> Repository).
 - **Developer Experience (DX)**: Database seeding with mock data (Datafaker) to improve development experience and efficiency.
 
+### Coming soon
+
+- Documentation
+- Unit tests and integration tests
+- Pagination
+- Authentication
+- Monitoring
+- Full containerization
+
 ## Project structure
 
 **Winery** table :
