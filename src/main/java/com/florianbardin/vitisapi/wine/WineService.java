@@ -6,13 +6,11 @@ import com.florianbardin.vitisapi.wine.dto.WineDto;
 import com.florianbardin.vitisapi.winery.Winery;
 import com.florianbardin.vitisapi.wine.dto.WineDtoMapper;
 import com.florianbardin.vitisapi.winery.WineryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,12 +26,13 @@ public class WineService {
         this.wineryRepository = wineryRepository;
     }
 
-    public List<WineDto> search(
+    public Page<WineDto> search(
             WineType type,
             String color,
             Integer vintage,
             Double minimumPrice,
-            Double maximumPrice
+            Double maximumPrice,
+            Pageable pageable
     ) {
         Specification<Wine> spec = (root, query, criteriaBuilder)
                 -> criteriaBuilder.conjunction();
@@ -54,10 +53,7 @@ public class WineService {
             spec = spec.and(WineSpecs.hasMaximumPrice(maximumPrice));
         }
 
-        return wineRepository.findAll(spec)
-                .stream()
-                .map(wineDtoMapper::toWineDto)
-                .collect(toList());
+        return wineRepository.findAll(spec, pageable).map(wineDtoMapper::toWineDto);
     }
 
     public WineDto findById(Integer id) {
