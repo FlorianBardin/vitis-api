@@ -2,9 +2,10 @@ package com.florianbardin.vitisapi.wine;
 
 import com.florianbardin.vitisapi.wine.dto.WineDto;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("wines")
@@ -17,14 +18,21 @@ public class WineController {
     }
 
     @GetMapping
-    public List<WineDto> search(
+    public Page<WineDto> search(
             @RequestParam(required = false) WineType type,
             @RequestParam(required = false) String color,
             @RequestParam(required = false) Integer vintage,
             @RequestParam(required = false) Double minimumPrice,
-            @RequestParam(required = false) Double maximumPrice
+            @RequestParam(required = false) Double maximumPrice,
+            @PageableDefault(sort = "id") Pageable pageable
     ) {
-        return wineService.search(type, color, vintage, minimumPrice, maximumPrice);
+        return wineService.search(
+                type,
+                color,
+                vintage,
+                minimumPrice,
+                maximumPrice,
+                pageable);
     }
 
     @GetMapping("{id}")
