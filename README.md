@@ -70,16 +70,6 @@ CREATE DATABASE vitis_api;
 
 **Base URL:** `http://localhost:8080`
 
-**Wine** table :
-```sql
-- id integer not null,
-- price float(53),
-- stock integer,
-- vintage integer not null,
-- winery_id integer,
-- color varchar(255) not null,
-- name varchar(255) not null,
-```
 | Method     | Path             | Description                                                                           |
 |:-----------|:-----------------|:--------------------------------------------------------------------------------------|
 | **GET**    | `/wineries`      | Get all wineries                                                                      |
@@ -99,3 +89,25 @@ CREATE DATABASE vitis_api;
 - Pagination: `GET /wines?page=0&size=15`
 - Sorting: `GET /wines?sort=price,desc`
 - Filtering: `GET /wines?vintage=2019&color=Red`
+
+### Database
+
+#### **Table: `winery`**
+| Column    | Type         | Constraints      | Description                 |
+| :-------- | :----------- | :--------------- |:----------------------------|
+| `id`      | `Integer`    | **PK**, Not Null | Unique identifier           |
+| `name`    | `Varchar(255)`| Not Null         | Name of the vineyard        |
+| `region`  | `Varchar(255)`| Not Null         | Geographic wine region      |
+| `address` | `Varchar(255)`| Nullable         | Physical address            |
+
+#### **Table: `wine`**
+| Column      | Type         | Constraints           | Description                   |
+| :---------- | :----------- | :-------------------- |:------------------------------|
+| `id`        | `Integer`    | **PK**, Not Null      | Unique identifier             |
+| `name`      | `Varchar(255)`| Not Null             | Name of the cuvée             |
+| `vintage`   | `Integer`    | Not Null              | Year of production            |
+| `color`     | `Varchar(255)`| Not Null             | Wine color (Red, White...)    |
+| `type`      | `Varchar(50)` | Not Null             | Type (Still, Sparkling, etc.) |
+| `price`     | `Float`      | Nullable, >= 0        | Unit price                    |
+| `stock`     | `Integer`    | Nullable, >= 0        | Quantity available            |
+| `winery_id` | `Integer`    | **FK** -> `winery(id)`| Foreign key to Winery table   |
