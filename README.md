@@ -66,13 +66,9 @@ CREATE DATABASE vitis_api;
 
 ## Project structure
 
-**Winery** table :
-```sql
-- id integer not null
-- address varchar(255)
-- name varchar(255) not null
-- region varchar(255) not null
-```
+### Endpoints
+
+**Base URL:** `http://localhost:8080`
 
 **Wine** table :
 ```sql
@@ -84,3 +80,22 @@ CREATE DATABASE vitis_api;
 - color varchar(255) not null,
 - name varchar(255) not null,
 ```
+| Method     | Path             | Description                                                                           |
+|:-----------|:-----------------|:--------------------------------------------------------------------------------------|
+| **GET**    | `/wineries`      | Get all wineries                                                                      |
+| **GET**    | `/wineries/{id}` | Get a winery by ID                                                                    |
+| **POST**   | `/wineries`      | Create a new winery                                                                   |
+| **PUT**    | `/wineries/{id}` | Update a winery                                                                       |
+| **DELETE** | `/wineries/{id}` | Delete a winery                                                                       |
+| ---        | ---              | ---                                                                                   |
+| **GET**    | `/wines`         | Get all wines (paginated by default)                                                  |
+| **GET**    | `/wines/{id}`    | Get a wine by ID                                                                      |
+| **GET**    | `/wines`         | **Search & Filter**<br/>Params: `name`, `color`, `vintage`, `minPrice`, `maxPrice`, `type` |
+| **POST**   | `/wines`         | Create a new wine                                                                     |
+| **PUT**    | `/wines/{id}`    | Update a wine                                                                         |
+| **DELETE** | `/wines/{id}`    | Delete a wine                                                                         |
+
+**Examples:**
+- Pagination: `GET /wines?page=0&size=15`
+- Sorting: `GET /wines?sort=price,desc`
+- Filtering: `GET /wines?vintage=2019&color=Red`
