@@ -1,5 +1,6 @@
 package com.florianbardin.vitisapi.exception;
 
+import org.springframework.data.core.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -59,4 +60,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(problemDetail, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(PropertyReferenceException.class)
+    public ResponseEntity<ProblemDetail> handlePropertyReferenceException(PropertyReferenceException e) {
+        String message = String.format("Invalid sort property '%s'", e.getPropertyName());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, message);
+        problemDetail.setTitle("Sorting Error");
+        problemDetail.setProperty("timestamp", LocalDateTime.now());
+
+        return new ResponseEntity<>(problemDetail, HttpStatus.BAD_REQUEST);
+    }
 }
