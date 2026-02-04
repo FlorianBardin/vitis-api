@@ -17,8 +17,11 @@ public class WineryController {
     }
 
     @GetMapping
-    public List<WineryDto> getWineries() {
-        return wineryService.findAll();
+    public List<WineryDto> search(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String region
+    ) {
+        return wineryService.search(name, region);
     }
 
     @GetMapping("{id}")
