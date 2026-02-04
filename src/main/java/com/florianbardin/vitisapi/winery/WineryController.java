@@ -2,6 +2,9 @@ package com.florianbardin.vitisapi.winery;
 
 import com.florianbardin.vitisapi.winery.dto.WineryDto;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +20,12 @@ public class WineryController {
     }
 
     @GetMapping
-    public List<WineryDto> search(
+    public Page<WineryDto> search(
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String region
+            @RequestParam(required = false) String region,
+            @PageableDefault Pageable pageable
     ) {
-        return wineryService.search(name, region);
+        return wineryService.search(name, region, pageable);
     }
 
     @GetMapping("{id}")

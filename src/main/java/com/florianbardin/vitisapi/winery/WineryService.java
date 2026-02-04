@@ -4,6 +4,8 @@ import com.florianbardin.vitisapi.exception.WineryNotFoundException;
 import com.florianbardin.vitisapi.winery.dto.WineryDto;
 import com.florianbardin.vitisapi.winery.dto.WineryDtoMapper;
 import com.florianbardin.vitisapi.wine.WineRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ public class WineryService {
         this.wineRepository = wineRepository;
     }
 
-    public List<WineryDto> search(String name, String region) {
+    public Page<WineryDto> search(String name, String region, Pageable pageable) {
         Specification<Winery> spec = (root, query, criteriaBuilder)
                 -> criteriaBuilder.conjunction();
 
@@ -39,10 +41,7 @@ public class WineryService {
             spec = spec.and(WinerySpecs.hasRegion(region));
         }
 
-        return wineryRepository.findAll(spec)
-                .stream()
-                .map(wineryDtoMapper::toWineryDto)
-                .collect(toList());
+        return wineryRepository.findAll(spec, pageable).map(wineryDtoMapper::toWineryDto);
     }
 
     public WineryDto findById(Integer id) {
