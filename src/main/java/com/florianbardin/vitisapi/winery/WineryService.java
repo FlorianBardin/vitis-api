@@ -4,6 +4,7 @@ import com.florianbardin.vitisapi.exception.WineryNotFoundException;
 import com.florianbardin.vitisapi.winery.dto.WineryDto;
 import com.florianbardin.vitisapi.winery.dto.WineryDtoMapper;
 import com.florianbardin.vitisapi.wine.WineRepository;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +28,18 @@ public class WineryService {
         this.wineRepository = wineRepository;
     }
 
-    public List<WineryDto> findAll() {
-        return wineryRepository.findAll()
+    public List<WineryDto> search(String name, String region) {
+        Specification<Winery> spec = (root, query, criteriaBuilder)
+                -> criteriaBuilder.conjunction();
+
+        if (name != null) {
+            spec = spec.and(WinerySpecs.nameContains(name));
+        }
+        if (region != null) {
+            spec = spec.and(WinerySpecs.hasRegion(region));
+        }
+
+        return wineryRepository.findAll(spec)
                 .stream()
                 .map(wineryDtoMapper::toWineryDto)
                 .collect(toList());
