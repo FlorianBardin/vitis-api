@@ -47,6 +47,7 @@ CREATE DATABASE vitis_api;
 - **RESTful CRUD Operations**: Full management of wines and wineries resources.
 - **Search Engine**: Dynamic filtering system for wines (using JPA Specifications).
 - **Data Integrity**: Strict input validation rules preventing corrupted data storage.
+- **Pagination**: Data divided into pages to improve readability and performance.
 
 ### Technical
 
@@ -59,7 +60,6 @@ CREATE DATABASE vitis_api;
 
 - Documentation
 - Unit tests and integration tests
-- Pagination
 - Authentication
 - Monitoring
 - Full containerization
@@ -70,23 +70,24 @@ CREATE DATABASE vitis_api;
 
 **Base URL:** `http://localhost:8080`
 
-| Method     | Path             | Description                                                                           |
-|:-----------|:-----------------|:--------------------------------------------------------------------------------------|
-| **GET**    | `/wineries`      | Get all wineries                                                                      |
-| **GET**    | `/wineries/{id}` | Get a winery by ID                                                                    |
-| **POST**   | `/wineries`      | Create a new winery                                                                   |
-| **PUT**    | `/wineries/{id}` | Update a winery                                                                       |
-| **DELETE** | `/wineries/{id}` | Delete a winery                                                                       |
-| ---        | ---              | ---                                                                                   |
-| **GET**    | `/wines`         | Get all wines (paginated by default)                                                  |
-| **GET**    | `/wines/{id}`    | Get a wine by ID                                                                      |
+| Method     | Path             | Description                                                                                |
+|:-----------|:-----------------|:-------------------------------------------------------------------------------------------|
+| **GET**    | `/wineries`      | Get all wineries (paginated by default)                                                    |
+| **GET**    | `/wineries/{id}` | Get a winery by ID                                                                         |
+| **GET**    | `/wineries`      | **Search & Filter**<br/>Params: `name`, `region`                                           |
+| **POST**   | `/wineries`      | Create a new winery                                                                        |
+| **PUT**    | `/wineries/{id}` | Update a winery                                                                            |
+| **DELETE** | `/wineries/{id}` | Delete a winery                                                                            |
+| ---        | ---              | ---                                                                                        |
+| **GET**    | `/wines`         | Get all wines (paginated by default)                                                       |
+| **GET**    | `/wines/{id}`    | Get a wine by ID                                                                           |
 | **GET**    | `/wines`         | **Search & Filter**<br/>Params: `name`, `color`, `vintage`, `minPrice`, `maxPrice`, `type` |
-| **POST**   | `/wines`         | Create a new wine                                                                     |
-| **PUT**    | `/wines/{id}`    | Update a wine                                                                         |
-| **DELETE** | `/wines/{id}`    | Delete a wine                                                                         |
+| **POST**   | `/wines`         | Create a new wine                                                                          |
+| **PUT**    | `/wines/{id}`    | Update a wine                                                                              |
+| **DELETE** | `/wines/{id}`    | Delete a wine                                                                              |
 
 **Examples:**
-- Pagination: `GET /wines?page=0&size=15`
+- Pagination: `GET /wineries?page=0&size=15`
 - Sorting: `GET /wines?sort=price,desc`
 - Filtering: `GET /wines?vintage=2019&color=Red`
 
