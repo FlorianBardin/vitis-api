@@ -40,6 +40,9 @@ CREATE DATABASE vitis_api;
 ./mvnw spring-boot:run
 ```
 
+> [!NOTE]
+> You can access the swagger page [here](http://localhost:8080/swagger-ui/index.html)
+
 ## Features
 
 ### Functional
@@ -47,7 +50,7 @@ CREATE DATABASE vitis_api;
 - **RESTful CRUD Operations**: Full management of wines and wineries resources.
 - **Search Engine**: Dynamic filtering system for wines (using JPA Specifications).
 - **Data Integrity**: Strict input validation rules preventing corrupted data storage.
-- **Pagination**: Data divided into pages to improve readability and performance.
+- **Pagination & Sorting**: Optimized data retrieval mechanism to handle large datasets efficiently.
 
 ### Technical
 
