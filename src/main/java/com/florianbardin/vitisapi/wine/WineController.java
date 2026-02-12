@@ -2,6 +2,7 @@ package com.florianbardin.vitisapi.wine;
 
 import com.florianbardin.vitisapi.wine.dto.WineDto;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -24,7 +25,7 @@ public class WineController {
             @RequestParam(required = false) Integer vintage,
             @RequestParam(required = false) Double minimumPrice,
             @RequestParam(required = false) Double maximumPrice,
-            @PageableDefault(sort = "id") Pageable pageable
+            @ParameterObject @PageableDefault(sort = "id") Pageable pageable
     ) {
         return wineService.search(
                 type,
