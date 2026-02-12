@@ -2,6 +2,7 @@ package com.florianbardin.vitisapi.winery;
 
 import com.florianbardin.vitisapi.winery.dto.WineryDto;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,7 +24,7 @@ public class WineryController {
     public Page<WineryDto> search(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String region,
-            @PageableDefault Pageable pageable
+            @ParameterObject @PageableDefault Pageable pageable
     ) {
         return wineryService.search(name, region, pageable);
     }
