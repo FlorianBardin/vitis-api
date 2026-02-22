@@ -25,7 +25,10 @@ public class WineController {
 
     @GetMapping
     @Operation(summary = "Search wines", description = "Returns a paginated and sorted list of wines matching the optional search criteria (type, color, vintage, price range).")
-    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "400", description = "Invalid query parameters (e.g. unknown type or invalid sort property)")
+    })
     public Page<WineDto> search(
             @RequestParam(required = false) WineType type,
             @RequestParam(required = false) String color,

@@ -25,7 +25,10 @@ public class WineryController {
 
     @GetMapping
     @Operation(summary = "Search wineries", description = "Returns a paginated and sorted list of wineries matching the optional search criteria.")
-    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "400", description = "Invalid query parameters (e.g. unknown type or invalid sort property)")
+    })
     public Page<WineryDto> search(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String region,
@@ -58,7 +61,8 @@ public class WineryController {
     @Operation(summary = "Delete a winery", description = "Removes a winery from the database by its ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Winery deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Winery not found")
+            @ApiResponse(responseCode = "404", description = "Winery not found"),
+            @ApiResponse(responseCode = "409", description = "Winery cannot be deleted because it still contains wines")
     })
     public void delete(@PathVariable Integer id) {
         wineryService.delete(id);
