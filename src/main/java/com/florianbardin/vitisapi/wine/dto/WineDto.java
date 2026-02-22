@@ -21,7 +21,7 @@ public record WineDto(
         @Max(value = 2100, message = "Vintage must be a valid year (up to 2100)")
         Integer vintage,
 
-        @Schema(description = "Type of the wine (e.g., DRY, SWEET, SPARKLING)", example = "DRY")
+        @Schema(description = "Type of the wine (e.g., STILL, SPARKLING, DESSERT)", example = "STILL")
         @NotNull(message = "Wine type is required")
         WineType type,
 
