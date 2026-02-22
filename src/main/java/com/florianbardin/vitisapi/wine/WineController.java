@@ -10,6 +10,7 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -57,9 +58,10 @@ public class WineController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new wine", description = "Adds a new wine to the database. Validates the input data and ensures the associated winery exists.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Wine created successfully"),
+            @ApiResponse(responseCode = "201", description = "Wine created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid input data (validation error)"),
             @ApiResponse(responseCode = "404", description = "Associated winery not found")
     })
@@ -79,9 +81,10 @@ public class WineController {
     }
 
     @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a wine", description = "Removes a wine from the database by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Wine deleted successfully"),
+            @ApiResponse(responseCode = "204", description = "Wine deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Wine not found")
     })
     public void delete(@PathVariable Integer id) {

@@ -10,6 +10,7 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -48,9 +49,10 @@ public class WineryController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new winery", description = "Adds a new winery to the database. Validates the input data.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Winery created successfully"),
+            @ApiResponse(responseCode = "201", description = "Winery created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid input data (validation error)")
     })
     public WineryDto create(@Valid @RequestBody WineryDto wineryDto) {
@@ -58,9 +60,10 @@ public class WineryController {
     }
 
     @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete a winery", description = "Removes a winery from the database by its ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Winery deleted successfully"),
+            @ApiResponse(responseCode = "204", description = "Winery deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Winery not found"),
             @ApiResponse(responseCode = "409", description = "Winery cannot be deleted because it still contains wines")
     })
